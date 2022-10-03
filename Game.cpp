@@ -26,6 +26,35 @@ void Game::Reset()
 	brick.y_position = 5;
 	brick.doubleThick = true;
 	brick.color = ConsoleColor::DarkGreen;
+
+	brick2.width = 10;
+	brick2.height = 2;
+	brick2.x_position = 0;
+	brick2.y_position = 5;
+	brick2.doubleThick = true;
+	brick2.color = ConsoleColor::DarkGreen;
+
+	brick3.width = 10;
+	brick3.height = 2;
+	brick3.x_position = 0;
+	brick3.y_position = 5;
+	brick3.doubleThick = true;
+	brick3.color = ConsoleColor::DarkGreen;
+
+	brick4.width = 10;
+	brick4.height = 2;
+	brick4.x_position = 0;
+	brick4.y_position = 5;
+	brick4.doubleThick = true;
+	brick4.color = ConsoleColor::DarkGreen;
+
+	brick5.width = 10;
+	brick5.height = 2;
+	brick5.x_position = 0;
+	brick5.y_position = 5;
+	brick5.doubleThick = true;
+	brick5.color = ConsoleColor::DarkGreen;
+
 }
 
 void Game::ResetBall()
@@ -70,6 +99,10 @@ void Game::Render() const
 
 	// TODO #3 - Update render to render all bricks
 	brick.Draw();
+	brick2.Draw();
+	brick3.Draw();
+	brick4.Draw();
+	brick5.Draw();
 
 	Console::Lock(false);
 }
@@ -83,7 +116,7 @@ void Game::CheckCollision()
 		ball.y_velocity *= -1;
 
 		// TODO #5 - If the ball hits the same brick 3 times (color == black), remove it from the vector
-
+		//if (ballHit =< 3 then remove from bricks)
 	}
 
 	// TODO #6 - If no bricks remain, pause ball and display victory text with R to reset
