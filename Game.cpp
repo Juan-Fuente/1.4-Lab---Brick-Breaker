@@ -19,14 +19,9 @@ void Game::Reset()
 	ball.color = ConsoleColor::Cyan;
 	ResetBall();
 
-	bottom.width = 80;
-	bottom.height = 3;
-	bottom.x_position = 0;
-	bottom.y_position = 38;
-	bottom.doubleThick = true;
-	bottom.color = ConsoleColor::Black;
-
+	
 	// TODO #2 - Add this brick and 4 more bricks to the vector
+	
 	brick.width = 10;
 	brick.height = 2;
 	brick.x_position = 0;
@@ -103,7 +98,7 @@ void Game::Render() const
 	
 	paddle.Draw();
 	ball.Draw();
-	bottom.Draw();
+	
 
 	// TODO #3 - Update render to render all bricks
 	brick.Draw();
@@ -111,14 +106,17 @@ void Game::Render() const
 	brick3.Draw();
 	brick4.Draw();
 	brick5.Draw();
-
+	bool defeat = false;
+	if (defeat==true){
+		std::cout << "You lose. Press ‘R’ to play again.";
+	}
 	Console::Lock(false);
 }
 
 void Game::CheckCollision()
 {
-	
 	// TODO #4 - Update collision to check all bricks
+	// TODO #5 - If the ball hits the same brick 3 times (color == black), remove it from the vector
 	if (brick.Contains(ball.x_position + ball.x_velocity, ball.y_position + ball.y_velocity))
 	{
 		if (brick.color == ConsoleColor(DarkBlue))
@@ -132,14 +130,7 @@ void Game::CheckCollision()
 			brick.color = ConsoleColor(brick.color - 1);
 			ball.y_velocity *= -1;
 		}
-
-		// TODO #5 - If the ball hits the same brick 3 times (color == black), remove it from the vector
-		//if (ballHit =< 3 then remove from bricks)
-
 	}
-
-
-
 
 	if (brick2.Contains(ball.x_position + ball.x_velocity, ball.y_position + ball.y_velocity))
 	{
@@ -202,24 +193,23 @@ void Game::CheckCollision()
 	}
 
 	// TODO #6 - If no bricks remain, pause ball and display victory text with R to reset
-	//if (bricks = empty)
-	//{
-	//	then std::cout "VICTORY!"
-	//}
-
+	if (brick.color == ConsoleColor(Black) && brick2.color == ConsoleColor(Black) && brick3.color == ConsoleColor(Black) && brick4.color == ConsoleColor(Black) && brick5.color == ConsoleColor(Black))
+	{
+		
+		ball.moving = false;
+	}
 	if (paddle.Contains(ball.x_position + ball.x_velocity, ball.y_velocity + ball.y_position))
 	{
 		ball.y_velocity *= -1;
 	}
 
 	// TODO #7 - If ball touches bottom of window, pause ball and display defeat text with R to reset
-	//if (balls touches x and y parameter in console)
-	//{
-	//	std::cout"DEFEAT PRESS R TO RESTART"
-	//}
 
-	if (bottom.Contains(ball.x_position + ball.x_velocity, ball.y_position + ball.y_velocity))
+	if (ball.y_position == 38)
 	{
-		std::cout << "DEFEAT PRESS R TO RESTART";
+		
+		ball.moving = false;
+		//defeat = true;
+		
 	}
 }
